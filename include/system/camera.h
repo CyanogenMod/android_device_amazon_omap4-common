@@ -220,6 +220,10 @@ enum {
     CAMERA_CMD_LONGSHOT_OFF = 15,
     CAMERA_CMD_METADATA_ON = 100,
     CAMERA_CMD_METADATA_OFF = 101,
+<<<<<<< HEAD
+=======
+
+>>>>>>> f51eedb4b161a4fe398d4ea05331725f9a5cb432
 #ifdef OMAP_ENHANCEMENT_VTC
     /**
      * Camera Preview deinitialization.

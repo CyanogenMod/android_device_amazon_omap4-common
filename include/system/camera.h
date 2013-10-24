@@ -97,12 +97,20 @@ enum {
     CAMERA_MSG_FOCUS_MOVE = 0x0800,       // notifyCallback
 #ifdef QCOM_HARDWARE
     CAMERA_MSG_STATS_DATA       = 0x1000,
+    CAMERA_MSG_META_DATA = 0x2000,
 #elif defined(OMAP_ENHANCEMENT) && defined(OMAP_ENHANCEMENT_BURST_CAPTURE)
     CAMERA_MSG_COMPRESSED_BURST_IMAGE = 0x1000, // dataCallback
     CAMERA_MSG_RAW_BURST = 0x2000,        // dataCallback
 #endif
 #endif
     CAMERA_MSG_ALL_MSGS = 0xFFFF
+};
+
+/** meta data type in CameraMetaDataCallback */
+enum {
+    CAMERA_META_DATA_ASD = 0x001,    //ASD data
+    CAMERA_META_DATA_FD = 0x002,     //FD/FP data
+    CAMERA_META_DATA_HDR = 0x003,    //Auto HDR data
 };
 
 /** cmdType in sendCommand functions */
@@ -186,7 +194,7 @@ enum {
      * can silently finish itself or show a dialog.
      */
     CAMERA_CMD_PING = 9,
- 
+
     /**
      * Configure the number of video buffers used for recording. The intended
      * video buffer count for recording is passed as arg1, which must be
@@ -198,6 +206,20 @@ enum {
      */
     CAMERA_CMD_SET_VIDEO_BUFFER_COUNT = 10,
 
+    /**
+     * Commands to enable/disable preview histogram
+     *
+     * Based on user's input to enable/disable histogram from the camera
+     * UI, send the appropriate command to the HAL to turn on/off the histogram
+     * stats and start sending the data to the application.
+     */
+    CAMERA_CMD_HISTOGRAM_ON     = 11,
+    CAMERA_CMD_HISTOGRAM_OFF     = 12,
+    CAMERA_CMD_HISTOGRAM_SEND_DATA  = 13,
+    CAMERA_CMD_LONGSHOT_ON = 14,
+    CAMERA_CMD_LONGSHOT_OFF = 15,
+    CAMERA_CMD_METADATA_ON = 100,
+    CAMERA_CMD_METADATA_OFF = 101,
 #ifdef OMAP_ENHANCEMENT_VTC
     /**
      * Camera Preview deinitialization.
@@ -311,6 +333,21 @@ typedef struct camera_face {
      * -2000, -2000 if this is not supported.
      */
     int32_t mouth[2];
+
+#ifdef QCOM_HARDWARE
+    int32_t smile_degree;
+    int32_t smile_score;
+    int32_t blink_detected;
+    int32_t face_recognised;
+    int32_t gaze_angle;
+    int32_t updown_dir;
+    int32_t leftright_dir;
+    int32_t roll_dir;
+    int32_t left_right_gaze;
+    int32_t top_bottom_gaze;
+    int32_t leye_blink;
+    int32_t reye_blink;
+#endif
 
 } camera_face_t;
 

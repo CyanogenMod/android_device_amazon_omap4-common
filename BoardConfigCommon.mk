@@ -35,6 +35,8 @@ BOARD_KERNEL_BASE := 0x80000000
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_VOLD_MAX_PARTITIONS := 32
@@ -61,29 +63,6 @@ BOARD_NEEDS_CUTILS_LOG := true
 
 BOARD_SEPOLICY_DIRS += \
     $(COMMON_FOLDER)/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    bluetooth.te \
-    debuggered.te \
-    device.te \
-    dhcp.te \
-    domain.te \
-    file.te \
-    file_contexts \
-    fixmac.te \
-    init.te \
-    init_shell.te \
-    mediaserver.te \
-    netd.te \
-    pvrsrvinit.te \
-    rild.te \
-    setup_fs.te \
-    shell.te \
-    smc_pa.te \
-    system.te \
-    tee.te \
-    ueventd.te \
-    vold.te
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
